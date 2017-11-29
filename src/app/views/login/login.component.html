@@ -1,0 +1,29 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="login-form">
+    <mat-card>
+        <mat-card-title>
+            Login
+        </mat-card-title>
+
+        <mat-card-content class="flex-container">
+            <div fxLayout="column wrap" fxLayoutWrap>
+                <form [formGroup]="form">
+                    <div>
+                        <mat-form-field fxFlexOrder="1" fxFlex="100">
+                            <input type="email" formControlName="email" matInput placeholder="Email address">
+                            <mat-error>{{form.get('email').getError('email') ? 'Not a valid email': ''}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field fxFlexOrder="2" fxFlex="100">
+                            <input type="password" formControlName="password" matInput placeholder="Please enter your password">
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions fxLayoutAlign="end" style="height: 40px;">
+            <button mat-button (click)="submit()">Login</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
