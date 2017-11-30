@@ -24,6 +24,9 @@
       ],
       "@store/*": [
         "app/store/*"
+      ],
+      "@interceptors/*": [
+        "app/interceptors/*"
       ]
     },
     "lib": [

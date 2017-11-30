@@ -5,8 +5,9 @@ import { MenuComponent } from './components/menu/menu.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MatSidenav, MatSidenavContent, MatSidenavContainer, MatSidenavModule, MatButton, MatList, MatListItem, MatListModule, MatIconModule } from "@angular/material";
-import { MaterialModule } from '../../material.module';
+import { MaterialModule } from 'app/material.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthenticationInterceptor } from '@interceptors/authentication.interceptor';
 const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
@@ -22,6 +23,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     MaterialModule
+  ],
+  providers: [
   ],
   declarations: [
     MainComponent,

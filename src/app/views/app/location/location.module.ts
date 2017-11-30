@@ -4,6 +4,8 @@ import { LocationOverviewComponent } from './overview/overview.component';
 import { DetailsComponent } from './details/details.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { LocationService } from '@services/location.service';
+import { MaterialModule } from 'app/material.module';
 
 const routes: Routes = [
   {
@@ -14,7 +16,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MaterialModule
+  ],
+  providers: [
+    LocationService
   ],
   declarations: [
     LocationOverviewComponent,

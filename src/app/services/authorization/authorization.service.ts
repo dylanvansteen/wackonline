@@ -12,7 +12,14 @@ export class AuthorizationService {
       .catch(err => Observable.throw(err));
   }
 
-  refreshToken() {
-
+  refreshToken(): Observable<boolean> {
+    const accessToken = localStorage.getItem('accessToken');
+    return this.http.post<LoginResponseModel>('/authentication', { accessToken }).map(data => {
+      localStorage.setItem('accessToken', data.accessToken);
+      return true;
+    }).catch(err => {
+      localStorage.removeItem('accessToken');
+      return Observable.throw('not authorized');
+    });
   }
 }

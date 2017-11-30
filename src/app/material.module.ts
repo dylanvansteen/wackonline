@@ -10,7 +10,8 @@ import {
   MatFormFieldModule,
   MatButtonModule,
   MatToolbarModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatTableModule
 } from '@angular/material';
 
 
@@ -25,7 +26,8 @@ import {
     MatFormFieldModule,
     MatButtonModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
   ],
   exports: [
     MatSidenavModule,
@@ -36,7 +38,9 @@ import {
     MatFormFieldModule,
     MatButtonModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+
   ]
 })
 export class MaterialModule { }
