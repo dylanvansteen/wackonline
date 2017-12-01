@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-main',
   templateUrl: './main.component.html',
   styles: [`
-  .mat-sidenav-container, .app-content {
+  .mat-sidenav-container {
     width: 100%;
     height: 100%;
   }
@@ -16,6 +16,7 @@ import { Component, OnInit } from '@angular/core';
   }
   .container{
     height: 100%;
+    overflow: hidden;
   }
   `]
 
