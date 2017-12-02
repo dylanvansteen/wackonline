@@ -1,29 +1,34 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LocationService } from '@services/location.service';
+import { LocationService } from '@services/location/location.service';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { AfterViewInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ApplicationState } from '@store/application.state';
+import { InitialLoadAction } from '@store/actions/location.overview.action';
+import { LocationModel } from '@services/location/location.contracts';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class LocationOverviewComponent implements AfterViewInit { // implements OnInit
+export class LocationOverviewComponent implements OnInit, AfterViewInit { // implements OnInit
   displayedColumns = ['_id', 'name', 'number', 'type'];
-  // sort: MatSort;
-  dataSource = new MatTableDataSource();
-  constructor(private locationService: LocationService) {
-    locationService.get().map(data => data['data']).subscribe(data => this.dataSource.data = data);
-    // this.dataSource.
-    // this.dataSource.data = new ExampleDataSource(locationService);
-  }
+  dataSource = new MatTableDataSource<LocationModel>();
   @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private store: Store<ApplicationState>) {
+    store.select(state => state.locationOverviewPage.locations).subscribe(data => this.dataSource.data = data);
+  }
+
+  ngOnInit() {
+    this.store.dispatch(new InitialLoadAction());
+  }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    console.log(this.dataSource.paginator);
   }
 }
 
