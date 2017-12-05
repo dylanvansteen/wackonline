@@ -2,33 +2,52 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocationService } from '@services/location/location.service';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, PageEvent, MatDialog } from '@angular/material';
 import { AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '@store/application.state';
-import { InitialLoadAction } from '@store/actions/location.overview.action';
-import { LocationModel } from '@services/location/location.contracts';
+import { InitialLoadAction, OnPageChangeAction } from '@store/actions/location.overview.action';
+import { LocationModel, LocationOverviewFilters } from '@services/location/location.contracts';
+import { DetailsComponent } from '@views/app/location/details/details.component';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class LocationOverviewComponent implements OnInit, AfterViewInit { // implements OnInit
+export class LocationOverviewComponent implements OnInit { // implements OnInit //, AfterViewInit
   displayedColumns = ['_id', 'name', 'number', 'type'];
   dataSource = new MatTableDataSource<LocationModel>();
-  @ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private store: Store<ApplicationState>) {
+  $filters: Observable<LocationOverviewFilters>;
+  $count: Observable<number>;
+  constructor(
+    private store: Store<ApplicationState>,
+    private dialog: MatDialog
+  ) {
     store.select(state => state.locationOverviewPage.locations).subscribe(data => this.dataSource.data = data);
+    this.$filters = store.select(state => state.locationOverviewPage.filter);
+    this.$count = store.select(state => state.locationOverviewPage.count);
   }
 
   ngOnInit() {
     this.store.dispatch(new InitialLoadAction());
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+  addLocation() {
+    const modal = this.dialog.open(DetailsComponent);
+    modal.afterClosed().subscribe(res => {
+      console.log(res);
+    });
+
+  }
+  // ngAfterViewInit() {
+  //   this.dataSource.sort = this.sort;
+  // }
+
+  onPageChanged($event: PageEvent): void {
+    this.store.dispatch(new OnPageChangeAction($event));
   }
 }
 

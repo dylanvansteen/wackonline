@@ -8,6 +8,11 @@ export interface LocationModel {
     type: number;
 }
 
+export interface LocationOverviewFilters {
+    $limit: number;
+    $skip?: number;
+}
+
 export interface LocationOverviewModelResponse extends OverviewModelResponse {
     data: Array<LocationModel>;
 }

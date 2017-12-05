@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { LocationService } from '@services/location/location.service';
 import { MaterialModule } from 'app/material.module';
 import { EffectsModule } from '@ngrx/effects';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
+    ReactiveFormsModule,
     EffectsModule.forFeature([LocationOverviewPageEffectService])
   ],
   providers: [
@@ -27,6 +29,9 @@ const routes: Routes = [
   ],
   declarations: [
     LocationOverviewComponent,
+    DetailsComponent
+  ],
+  entryComponents: [
     DetailsComponent
   ]
 })

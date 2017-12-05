@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { MaterialModule } from 'app/material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticationInterceptor } from '@interceptors/authentication.interceptor';
+import { MatDialogModule } from '@angular/material';
+
 const routes: Routes = [
   {
     path: '', component: MainComponent, children: [

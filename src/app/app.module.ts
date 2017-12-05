@@ -35,11 +35,9 @@ import { AuthenticationInterceptor } from '@interceptors/authentication.intercep
     MaterialModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    // StoreModule.forRoot({ routerReducer }),
     StoreModule.forRoot(reducers, { metaReducers: [storeFreeze], initialState: INITIAL_APPLICATION_STATE }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([LoginPageEffectService]),
-    // StoreRouterConnectingModule
   ],
   providers: [
     AuthorizationService,

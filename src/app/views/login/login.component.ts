@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      console.log(new SubmitFormAction(this.form.value));
       this.store.dispatch(new SubmitFormAction(this.form.value));
     }
   }

@@ -24,5 +24,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [length]="100" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator [length]="$count | async" [pageSize]="($filters | async).$limit" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChanged($event)"></mat-paginator>
 </div>
+
+<button mat-fab color="primary" (click)="addLocation()">Primary</button>
