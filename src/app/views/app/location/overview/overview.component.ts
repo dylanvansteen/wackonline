@@ -6,7 +6,7 @@ import { MatTableDataSource, MatSort, PageEvent, MatDialog } from '@angular/mate
 import { AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '@store/application.state';
-import { InitialLoadAction, OnPageChangeAction, CreatedLocationSuccessfullAction } from '@store/actions/location.overview.action';
+import { InitialLoadAction, OnPageChangeAction, CreatedLocationSuccessfullAction, UpdatedLocationSuccessfullAction } from '@store/actions/location.overview.action';
 import { LocationModel, LocationOverviewFilters } from '@services/location/location.contracts';
 import { DetailsComponent } from '@views/app/location/details/details.component';
 
@@ -42,6 +42,16 @@ export class LocationOverviewComponent implements OnInit { // implements OnInit 
         this.store.dispatch(new CreatedLocationSuccessfullAction(res));
       }
     });
+  }
+
+  openLocation(location: LocationModel) {
+    const modal = this.dialog.open(DetailsComponent, { data: location });
+    modal.afterClosed().subscribe(res => {
+      if (res) {
+        this.store.dispatch(new UpdatedLocationSuccessfullAction(res));
+      }
+    });
+
   }
 
   onPageChanged($event: PageEvent): void {

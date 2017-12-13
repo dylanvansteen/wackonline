@@ -13,7 +13,7 @@ export class LocationService {
   }
 
   update(model: LocationModel): Observable<LocationModel> {
-    return this.http.post<LocationModel>(`/location`, JSON.stringify(model));
+    return this.http.put<LocationModel>(`/location/${model._id}`, model);
   }
 
   create(model: LocationModel): Observable<LocationModel> {

@@ -7,6 +7,7 @@ import {
 } from '@store/actions/location.overview.action';
 import { Action } from '@ngrx/store';
 import { LocationOverviewPageState } from '@store/states/location.overview.page.state';
+import { LocationModel } from '@services/location/location.contracts';
 
 
 export function locationOverviewPageReducer(state: LocationOverviewPageState, action: any): LocationOverviewPageState {
@@ -54,5 +55,13 @@ function handleCreatedLocation(state: LocationOverviewPageState, action: Created
 }
 
 function handleUpdatedLocation(state: LocationOverviewPageState, action: UpdatedLocationSuccessfullAction): LocationOverviewPageState {
-    return state;
+    const updatedLocation = action.payload;
+    const locations: LocationModel[] = Object.assign([], state.locations);
+    const index = locations.findIndex(({ _id }) => _id === updatedLocation._id);
+
+    if (index > -1) {
+        locations[index] = updatedLocation;
+    }
+
+    return Object.assign({}, state, { locations });
 }

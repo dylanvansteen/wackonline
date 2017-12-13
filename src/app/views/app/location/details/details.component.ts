@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocationService } from '@services/location/location.service';
-import { LocationType } from '@services/location/location.contracts';
+import { LocationType, LocationModel } from '@services/location/location.contracts';
 
 @Component({
   selector: 'app-details',
@@ -24,26 +24,35 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    const data: LocationModel = this.data || {};
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
-      number: ['', [Validators.required, Validators.maxLength(25)]],
-      type: ['', [Validators.required]],
-      GLN: [''],
-      telephone: ['', [Validators.maxLength(30)]],
-      emailAddress: ['', [Validators.maxLength(200)]],
-      addressLine: ['', [Validators.maxLength(100)]],
-      postalCode: ['', [Validators.maxLength(15)]],
-      city: ['', [Validators.maxLength(30)]],
-      country: ['', [Validators.maxLength(50)]],
+      _id: [data._id],
+      name: [data.name, [Validators.required, Validators.maxLength(50)]],
+      number: [data.number, [Validators.required, Validators.maxLength(25)]],
+      type: [data.type, [Validators.required]],
+      GLN: [data.GLN],
+      telephone: [data.telephone, [Validators.maxLength(30)]],
+      emailaddress: [data.emailaddress, [Validators.maxLength(200)]],
+      addressLine: [data.addressLine, [Validators.maxLength(100)]],
+      postalCode: [data.postalCode, [Validators.maxLength(15)]],
+      city: [data.city, [Validators.maxLength(30)]],
+      country: [data.country, [Validators.maxLength(50)]],
     });
   }
 
 
   submit() {
     if (this.form.valid) {
-      this.locationService.create(this.form.value).subscribe(res => {
-        this.dialogRef.close(res);
-      });
+      const model: LocationModel = this.form.value;
+      if (!model._id) {
+        this.locationService.create(model).subscribe(res => {
+          this.dialogRef.close(res);
+        });
+      } else {
+        this.locationService.update(model).subscribe(res => {
+          this.dialogRef.close(res);
+        });
+      }
     }
   }
 
