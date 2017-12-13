@@ -15,43 +15,36 @@ import {
   MatMenuModule,
   MatPaginatorModule,
   MatSortModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSelectModule
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-
+const modules = [
+  FlexLayoutModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatProgressSpinnerModule,
+  MatTableModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatDialogModule,
+  MatSelectModule
+];
 
 @NgModule({
   imports: [
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatCardModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
+    modules
   ],
   exports: [
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatCardModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule
+    modules
   ]
 })
 export class MaterialModule { }

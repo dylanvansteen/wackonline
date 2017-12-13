@@ -6,7 +6,9 @@ export enum actionTypes {
     initialLoad = '[Location overview page] initial load',
     initialLoadSuccessfull = '[Location overview page] initial load successfull',
     onPageChange = '[Location overview page] on page change',
-    initialLoadOnError = '[Location overview page] initial load on error'
+    initialLoadOnError = '[Location overview page] initial load on error',
+    CreatedLocationSuccessfull = '[Location overview page] Created location successfull',
+    UpdatedLocationSuccessfull = '[Location overview page] updated location successfull',
 }
 
 export class InitialLoadAction implements Action {
@@ -29,6 +31,19 @@ export class OnPageChangeAction implements Action {
     }
 }
 
+export class CreatedLocationSuccessfullAction implements Action {
+    type = actionTypes.CreatedLocationSuccessfull;
+
+    constructor(public payload: LocationModel) {
+    }
+}
+
+export class UpdatedLocationSuccessfullAction implements Action {
+    type = actionTypes.UpdatedLocationSuccessfull;
+
+    constructor(public payload: LocationModel) {
+    }
+}
 
 export class OnErrorAction implements Action {
     type = actionTypes.initialLoadOnError;

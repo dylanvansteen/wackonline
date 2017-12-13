@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LocationService } from '@services/location/location.service';
+import { LocationType } from '@services/location/location.contracts';
 
 @Component({
   selector: 'app-details',
@@ -9,11 +11,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class DetailsComponent implements OnInit {
   public form: FormGroup;
-
+  // locationType = LocationType;
+  locationTypes = new Array<{ value: string, display: string }>();
   constructor(
     public dialogRef: MatDialogRef<DetailsComponent>,
     public formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    public locationService: LocationService,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    for (const key of Object.keys(LocationType)) {
+      this.locationTypes.push({ value: LocationType[key], display: LocationType[key] });
+    }
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -22,7 +30,7 @@ export class DetailsComponent implements OnInit {
       type: ['', [Validators.required]],
       GLN: [''],
       telephone: ['', [Validators.maxLength(30)]],
-      emailAddress: ['', [Validators.maxLength(200), Validators.email]],
+      emailAddress: ['', [Validators.maxLength(200)]],
       addressLine: ['', [Validators.maxLength(100)]],
       postalCode: ['', [Validators.maxLength(15)]],
       city: ['', [Validators.maxLength(30)]],
@@ -32,7 +40,11 @@ export class DetailsComponent implements OnInit {
 
 
   submit() {
-
+    if (this.form.valid) {
+      this.locationService.create(this.form.value).subscribe(res => {
+        this.dialogRef.close(res);
+      });
+    }
   }
 
   cancel() {
