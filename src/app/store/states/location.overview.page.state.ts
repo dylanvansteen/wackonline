@@ -12,6 +12,6 @@ export const INITIAL_LOCATIONOVERVIEW_PAGE_STATE: LocationOverviewPageState = {
     isLoading: false,
     errorMessage: null,
     locations: [],
-    filter: { $limit: 5 },
+    filter: { $limit: 5, $sort: '-modifiedOn' },
     count: 0
 };

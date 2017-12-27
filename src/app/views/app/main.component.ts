@@ -15,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
     margin: 20px 15px;
   }
   .container{
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
   }
   `]

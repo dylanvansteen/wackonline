@@ -1,15 +1,23 @@
-<div class="example-container mat-elevation-z8">
-  <mat-table [dataSource]="dataSource">
-    <!-- ID Column -->
-    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-      <mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row[column]}} </mat-cell>
-    </ng-container>
+<div *ngIf="!($isLoading | async); else loading">
+  <div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource">
+      <!-- ID Column -->
+      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row[column]}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openLocation(row)"></mat-row>
-  </mat-table>
-  <mat-paginator [length]="$count | async" [pageSize]="($filters | async).$limit" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChanged($event)"></mat-paginator>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openLocation(row)"></mat-row>
+    </mat-table>
+    <mat-paginator [length]="$count | async" [pageSize]="($filters | async).$limit" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChanged($event)">
+    </mat-paginator>
+  </div>
+  <button mat-fab color="primary" (click)="openLocation()">New</button>
 </div>
 
-<button mat-fab color="primary" (click)="addLocation()">Primary</button>
+<ng-template #loading>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -19,6 +19,7 @@ import {
   MatSelectModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ExtenstionsModule } from 'app/tools/extensions/extensions.module';
 
 const modules = [
   FlexLayoutModule,
@@ -36,7 +37,8 @@ const modules = [
   MatPaginatorModule,
   MatSortModule,
   MatDialogModule,
-  MatSelectModule
+  MatSelectModule,
+  ExtenstionsModule
 ];
 
 @NgModule({

@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  $isSubmitting: Observable<boolean>;
+  $isSigninIn: Observable<boolean>;
   $errorMessage: Observable<string>;
 
   constructor(
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       password: ['Welkom01', [Validators.min(6)]]
     });
 
-    this.$isSubmitting = this.store.select(state => state.loginPage.signinIn);
+    this.$isSigninIn = this.store.select(state => state.loginPage.signinIn);
     this.$errorMessage = this.store.select(state => state.loginPage.errorMessage);
   }
 

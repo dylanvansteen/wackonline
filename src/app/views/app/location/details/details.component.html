@@ -38,7 +38,7 @@
   </div>
 
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions *saving="isSaving">
   <button mat-button (click)="submit()" tabindex="2">Submit</button>
   <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
 </div>

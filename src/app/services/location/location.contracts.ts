@@ -20,6 +20,7 @@ export interface LocationModel {
 export interface LocationOverviewFilters {
     $limit: number;
     $skip?: number;
+    $sort: string;
 }
 
 export interface LocationOverviewModelResponse extends OverviewModelResponse {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, fadeInContent } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocationService } from '@services/location/location.service';
 import { LocationType, LocationModel } from '@services/location/location.contracts';
@@ -11,8 +11,9 @@ import { LocationType, LocationModel } from '@services/location/location.contrac
 })
 export class DetailsComponent implements OnInit {
   public form: FormGroup;
-  // locationType = LocationType;
   locationTypes = new Array<{ value: string, display: string }>();
+  isSaving = false;
+
   constructor(
     public dialogRef: MatDialogRef<DetailsComponent>,
     public formBuilder: FormBuilder,
@@ -44,20 +45,31 @@ export class DetailsComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       const model: LocationModel = this.form.value;
+      this.isSaving = true;
+      this.save(model).then(res => {
+        this.dialogRef.close(res);
+      }, err => {
+      }).then(() => {
+        this.isSaving = false;
+      });
+    }
+  }
+
+  save(model: LocationModel): Promise<LocationModel> {
+    return new Promise((resolve, reject) => {
       if (!model._id) {
         this.locationService.create(model).subscribe(res => {
-          this.dialogRef.close(res);
-        });
+          resolve(res);
+        }, err => reject(err));
       } else {
-        this.locationService.update(model).subscribe(res => {
-          this.dialogRef.close(res);
-        });
+        this.locationService.update(model).delay(3 * 1000).subscribe(res => {
+          resolve(res);
+        }, err => reject(err));
       }
-    }
+    });
   }
 
   cancel() {
     this.dialogRef.close();
   }
-
 }
