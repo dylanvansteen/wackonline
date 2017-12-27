@@ -13,7 +13,7 @@ import { LocationModel } from '@services/location/location.contracts';
 export function locationOverviewPageReducer(state: LocationOverviewPageState, action: any): LocationOverviewPageState {
     switch (action.type) {
         case actionTypes.initialLoad:
-            return Object.assign({}, state, { isLoading: true, filter: { $skip: 0, $limit: 15 } });
+            return Object.assign({}, state, { isLoading: true, filter: { $skip: 0, $limit: 20 } });
         case actionTypes.initialLoadSuccessfull:
             return handleLoadCompleted(state, action);
         case actionTypes.onPageChange:

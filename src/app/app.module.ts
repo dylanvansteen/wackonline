@@ -21,6 +21,7 @@ import { reducers } from '@store/reducers';
 import { INITIAL_APPLICATION_STATE } from '@store/application.state';
 import { LoginPageEffectService } from '@store/effects/login.page.effect';
 import { AuthenticationInterceptor } from '@interceptors/authentication.interceptor';
+import { LocationService } from '@services/location/location.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AuthenticationInterceptor } from '@interceptors/authentication.intercep
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
       multi: true,
-    }
+    },
+    LocationService
   ],
   bootstrap: [AppComponent]
 })

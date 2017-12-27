@@ -1,0 +1,13 @@
+<h1>this should be a form</h1>
+
+<div class="flex-container">
+
+    <div fxLayout="column wrap" fxLayoutWrap fxLayoutGap="10px">
+        <span *ngFor="let field of fields">
+            <app-form-content [fxFlex]="field.width" [form]="form" [field]="field"></app-form-content>
+        </span>
+    </div>
+</div>
+
+
+{{form.value | json}}

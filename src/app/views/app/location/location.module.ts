@@ -9,6 +9,7 @@ import { LocationService } from '@services/location/location.service';
 import { MaterialModule } from 'app/material.module';
 import { EffectsModule } from '@ngrx/effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DynamicFormModule } from 'app/tools/dynamic-form/dynamic.form.module';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MaterialModule,
     ReactiveFormsModule,
-    EffectsModule.forFeature([LocationOverviewPageEffectService])
+    EffectsModule.forFeature([LocationOverviewPageEffectService]),
   ],
   providers: [
     LocationService,

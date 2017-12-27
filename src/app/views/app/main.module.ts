@@ -9,6 +9,7 @@ import { MaterialModule } from 'app/material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticationInterceptor } from '@interceptors/authentication.interceptor';
 import { MatDialogModule } from '@angular/material';
+import { DynamicFormModule } from 'app/tools/dynamic-form/dynamic.form.module';
 
 const routes: Routes = [
   {
@@ -24,7 +25,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    DynamicFormModule
+
   ],
   providers: [
   ],
