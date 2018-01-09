@@ -49,4 +49,5 @@ const modules = [
     modules
   ]
 })
+
 export class MaterialModule { }

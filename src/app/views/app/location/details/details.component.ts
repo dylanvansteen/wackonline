@@ -58,11 +58,11 @@ export class DetailsComponent implements OnInit {
   save(model: LocationModel): Promise<LocationModel> {
     return new Promise((resolve, reject) => {
       if (!model._id) {
-        this.locationService.create(model).subscribe(res => {
+        this.locationService.create<LocationModel>(model).subscribe(res => {
           resolve(res);
         }, err => reject(err));
       } else {
-        this.locationService.update(model).delay(3 * 1000).subscribe(res => {
+        this.locationService.update<LocationModel>(model).delay(3 * 1000).subscribe(res => {
           resolve(res);
         }, err => reject(err));
       }

@@ -15,7 +15,8 @@ const routes: Routes = [
     path: '', component: MainComponent, children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'location', loadChildren: 'app/views/app/location/location.module#LocationModule' }
+      { path: 'location', loadChildren: 'app/views/app/location/location.module#LocationModule' },
+      { path: 'itemdefinition', loadChildren: 'app/views/app/itemdefinition/itemdefinition.module#ItemDefinitionModule' },
     ]
   },
 ];

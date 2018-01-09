@@ -1,8 +1,7 @@
-import { OverviewModelResponse } from '@services/contract';
+import { OverviewModelResponse, Entity, Filters } from '@services/contract';
 
 
-export interface LocationModel {
-    _id: string;
+export interface LocationModel extends Entity {
     name: string;
     number: string;
     type: LocationType;
@@ -13,14 +12,10 @@ export interface LocationModel {
     postalCode: string;
     city: string;
     country: string;
-    createdOn: Date;
-    modifiedOn: Date;
 }
 
-export interface LocationOverviewFilters {
-    $limit: number;
-    $skip?: number;
-    $sort: string;
+// tslint:disable-next-line:no-empty-interface
+export interface LocationOverviewFilters extends Filters {
 }
 
 export interface LocationOverviewModelResponse extends OverviewModelResponse {
